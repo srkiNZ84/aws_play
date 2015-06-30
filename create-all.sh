@@ -25,4 +25,9 @@ INSTANCE_DNS=`ec2-describe-instances $INSTANCE_ID | grep INSTANCE | cut -f 4`
 echo "DNS set to $INSTANCE_DNS"
 
 # Log in and test
+SLEEP=120
+echo "Waiting for instance to come up, sleeping for $SLEEP seconds..."
+sleep $SLEEP
+echo "All done waiting, attempting SSH..."
 ssh -oStrictHostKeyChecking=no -i $KEYPAIR_NAME.key ubuntu@$INSTANCE_DNS sudo cat /root/hello_world.txt
+echo "Yay!"
