@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SEC_GROUP_NAME=bind-servers
-SEC_GROUP_DESCRIPTION="Security group to add ssh only access"
+SEC_GROUP_DESCRIPTION="Security group to add DNS and SSH access"
 UBUNTU_AMI=ami-5b748b30
 KEYPAIR_NAME=bind-server-keys
 INSTANCE_APPLICATION="DNS Server (Bind9)"
