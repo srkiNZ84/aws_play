@@ -1,6 +1,7 @@
 zone "dukic.co.nz" {
-	type master;
-	file "/etc/bind/db.dukic.co.nz";
+	type slave;
+	file "/var/cache/bind/db.dukic.co.nz";
+	masters { 10.180.204.31; 54.166.23.198; };
 };
 
 //zone "127.in-addr.arpa" {
