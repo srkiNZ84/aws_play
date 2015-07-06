@@ -12,5 +12,5 @@ debconf-set-selections <<< "postfix postfix/mailname string dukic.co.nz"
 debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 echo "Done."
 echo "Installing Postfix..."
-apt-get install -y postfix
+apt-get -y install postfix openssl-blacklist
 echo "Done."
