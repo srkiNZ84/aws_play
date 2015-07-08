@@ -27,6 +27,8 @@ ec2-create-tags $INSTANCE_ID --tag Name=$INSTANCE_NAME --tag Application="$INSTA
 INSTANCE_DNS=`ec2-describe-instances $INSTANCE_ID | grep INSTANCE | cut -f 4`
 echo "Manager DNS set to $INSTANCE_DNS"
 
+#TODO: After you get the configuration automated, change this to ensure that the instances don't get assigned public IP's
+
 ### Create first node instance
 INSTANCE_ID=`ec2run $UBUNTU_AMI -k $KEYPAIR_NAME -g $SEC_GROUP_NAME -f bootstrap.sh | grep INSTANCE | cut -f 2`
 echo "First node Instance id is: $INSTANCE_ID"

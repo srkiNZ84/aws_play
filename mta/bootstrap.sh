@@ -18,3 +18,4 @@ echo "Done."
 #TODO: Register IP with DNS servers
 #TODO: Generate TLS certificate and reconfigure Postfix to use opportunistic TLS encryption
 #TODO: Register "mail" CNAME with DNS servers
+#TODO: Install Logstash and point it at the central log server
