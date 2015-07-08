@@ -18,6 +18,7 @@ chmod 600 $KEYPAIR_NAME.key
 ### Create manager instance
 INSTANCE_ID=`ec2run $UBUNTU_AMI -k $KEYPAIR_NAME -g $SEC_GROUP_NAME -f bootstrap.sh | grep INSTANCE | cut -f 2`
 echo "Manager Instance id is: $INSTANCE_ID"
+echo $INSTANCE_ID >> instances
 
 # Attach tags
 INSTANCE_NAME=`pwgen -A0 -N 1`
@@ -32,6 +33,7 @@ echo "Manager DNS set to $INSTANCE_DNS"
 ### Create first node instance
 INSTANCE_ID=`ec2run $UBUNTU_AMI -k $KEYPAIR_NAME -g $SEC_GROUP_NAME -f bootstrap.sh | grep INSTANCE | cut -f 2`
 echo "First node Instance id is: $INSTANCE_ID"
+echo $INSTANCE_ID >> instances
 
 # Attach tags
 INSTANCE_NAME=`pwgen -A0 -N 1`
@@ -44,6 +46,7 @@ echo "First node DNS set to $INSTANCE_DNS"
 ### Create second node instance
 INSTANCE_ID=`ec2run $UBUNTU_AMI -k $KEYPAIR_NAME -g $SEC_GROUP_NAME -f bootstrap.sh | grep INSTANCE | cut -f 2`
 echo "Second node Instance id is: $INSTANCE_ID"
+echo $INSTANCE_ID >> instances
 
 # Attach tags
 INSTANCE_NAME=`pwgen -A0 -N 1`
