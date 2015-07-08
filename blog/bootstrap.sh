@@ -8,7 +8,7 @@ echo "Outputting to file..."
 /usr/games/fortune > /root/hello_world.txt
 echo "Done."
 echo "Installing Wordpress pre-requisites..."
-apt-get -y pwgen
+apt-get -y install pwgen
 MYSQL_ROOT_PW=`pwgen -s 20 1`
 WP_DB=`pwgen -A0 8 1`
 WP_DB_USER=`pwgen -A0 8 1`
