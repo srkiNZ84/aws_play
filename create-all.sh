@@ -9,7 +9,7 @@ SUBNET_ID=
 INSTANCE_TYPE=m3.medium
 
 # Create security group and open port 22
-SEC_GROUP_ID=`ec2-add-group $SEC_GROUP_NAME -d "$SEC_GROUP_DESCRIPTION" --vpc $VPC_ID`
+SEC_GROUP_ID=`ec2-add-group $SEC_GROUP_NAME -d "$SEC_GROUP_DESCRIPTION" --vpc $VPC_ID | cut -f 2`
 ec2-authorize $SEC_GROUP_ID -p 22 -P tcp
 
 # Create keypair
