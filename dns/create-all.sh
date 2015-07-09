@@ -2,12 +2,12 @@
 
 SEC_GROUP_NAME=bind-servers
 SEC_GROUP_DESCRIPTION="Security group to add DNS and SSH access"
-UBUNTU_AMI=ami-853cf3ee
+UBUNTU_AMI=ami-c135f3aa
 KEYPAIR_NAME=dns-server-keys
 INSTANCE_APPLICATION="DNS Server (Bind9)"
 VPC_ID=vpc-4eebfd2b
 SUBNET_ID=subnet-17c5d12d
-INSTANCE_TYPE=m3.medium
+INSTANCE_TYPE=t2.small
 PRIMARY_NETWORK_INTERFACE_DESCRIPTION="Primary DNS server network interface. Associate with public, elastic IP."
 PRIMARY_NETWORK_INTERFACE_NAME="Primary DNS server interface"
 SECONDARY_NETWORK_INTERFACE_DESCRIPTION="Secondary DNS server network interface. Associate with public, elastic IP."
