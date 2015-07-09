@@ -4,17 +4,20 @@ SEC_GROUP_NAME=ssh-only
 SEC_GROUP_DESCRIPTION="Security group to add ssh only access"
 UBUNTU_AMI=ami-0199636a
 KEYPAIR_NAME=dev-keys
+VPC_ID=
+SUBNET_ID=
+INSTANCE_TYPE=m3.medium
 
 # Create security group and open port 22
-ec2-add-group $SEC_GROUP_NAME -d "$SEC_GROUP_DESCRIPTION"
-ec2-authorize $SEC_GROUP_NAME -p 22
+SEC_GROUP_ID=`ec2-add-group $SEC_GROUP_NAME -d "$SEC_GROUP_DESCRIPTION" --vpc $VPC_ID`
+ec2-authorize $SEC_GROUP_ID -p 22 -P tcp
 
 # Create keypair
 ec2-create-keypair $KEYPAIR_NAME > $KEYPAIR_NAME.key
 chmod 600 $KEYPAIR_NAME.key
 
 # Create instance
-INSTANCE_ID=`ec2run $UBUNTU_AMI -k $KEYPAIR_NAME -g $SEC_GROUP_NAME -f bootstrap.sh | grep INSTANCE | cut -f 2`
+INSTANCE_ID=`ec2run $UBUNTU_AMI -k $KEYPAIR_NAME -g $SEC_GROUP_ID -f bootstrap.sh --subnet $SUBNET_ID --associate-public-ip-address true -t $INSTANCE_TYPE | grep INSTANCE | cut -f 2`
 echo "Instance id is: $INSTANCE_ID"
 
 # Attach tags
