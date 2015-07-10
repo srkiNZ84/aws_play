@@ -16,7 +16,7 @@ SEC_GROUP_ID=`ec2-add-group $SEC_GROUP_NAME -d "$SEC_GROUP_DESCRIPTION" --vpc $V
 ec2-authorize $SEC_GROUP_ID -p 22 -P tcp
 ec2-authorize $SEC_GROUP_ID -p 25 -P tcp
 
-## Setup elastic address and network interfaces
+## Setup elastic address and network interface
 MTA_ELASTIC_IP_ID=`ec2-allocate-address --domain vpc | cut -f 5`
 MTA_NETWORK_INTERFACE_ID=`ec2-create-network-interface -d "$MTA_NETWORK_INTERFACE_DESCRIPTION" -g $SEC_GROUP_ID $SUBNET_ID | grep NETWORKINTERFACE | cut -f 2`
 ec2-create-tags $MTA_NETWORK_INTERFACE_ID --tag Name="$MTA_NETWORK_INTERFACE_NAME"
