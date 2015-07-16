@@ -1,6 +1,10 @@
 Things left to do:
 
 * fix up SNI warning on the blog, in order to get that A+ from SSL Labs
-* get the MTA making available TLS for incoming SMTP connections
+* get the MTA making available TLS for incoming SMTP connections - DONE
 * get the MTA using TLS for outgoing connections
 * Get the MTA using SASL for incoming SMTP connections, allowing only trusted users to use as a proxy
+* Setup 2FA SSH with google otp
+* Setup backups of blog content (either DB dumps or WP exports or both) - DONE
+* Setup OCSP on blog
+* Setup HSTS on blog
