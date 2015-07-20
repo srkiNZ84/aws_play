@@ -1,0 +1,18 @@
+See: https://gist.github.com/srkiNZ84/7380acc9260b54ba99b7 for s3 backup setup etc...
+
+Sample "append only" policy is:
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*",
+                "s3:PutObject"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
