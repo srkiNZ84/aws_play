@@ -6,6 +6,7 @@ PUBLIC_SUBNET_CIDR=10.0.0.0/24
 PUBLIC_SUBNET_NAME="Public subnet (DMZ)"
 PUBLIC_GATEWAY_NAME="Public Internet Gateway"
 PUBLIC_ROUTE_TABLE_NAME="Public subnet route table"
+MONITORING_ROUTE_TABLE_NAME="Monitoring subnet route table"
 INTERNET_CIDR=0.0.0.0/0
 MANAGEMENT_SUBNET_CIDR=10.0.1.0/24
 MANAGEMENT_SUBNET_NAME="Management subnet"
@@ -52,9 +53,21 @@ echo "Management subnet id is: $MANAGEMENT_SUBNET_ID"
 ec2-create-tags $MANAGEMENT_SUBNET_ID --tag Name="$MANAGEMENT_SUBNET_NAME"
 
 # Monitoring Subnet
+# NOTE: In future, will not need to associate the internet gateway with the monitoring subnet. This depends on setting up the VPN, so that we can access the machine without going through the internet.
 MONITORING_SUBNET_ID=`ec2-create-subnet --vpc $VPC_ID --cidr $MONITORING_SUBNET_CIDR | cut -f 2`
 echo "Monitoring subnet id is: $MONITORING_SUBNET_ID"
 ec2-create-tags $MONITORING_SUBNET_ID --tag Name="$MONITORING_SUBNET_NAME"
+
+MONITORING_ROUTE_TABLE_ID=`ec2-create-route-table $VPC_ID | grep ROUTETABLE | cut -f 2`
+echo "Monitoring route table is: $MONITORING_ROUTE_TABLE_ID"
+ec2-create-tags $MONITORING_ROUTE_TABLE_ID --tag Name="$MONITORING_ROUTE_TABLE_NAME"
+
+# Add rule for routing through the gateway
+ec2-create-route $MONITORING_ROUTE_TABLE_ID --cidr $INTERNET_CIDR --gateway $PUBLIC_GATEWAY_ID
+
+# Associate monitoring route table with the subnet
+ec2-associate-route-table $MONITORING_ROUTE_TABLE_ID --subnet $PUBLIC_SUBNET_ID
+
 
 
 
