@@ -9,6 +9,8 @@ PUBLIC_ROUTE_TABLE_NAME="Public subnet route table"
 INTERNET_CIDR=0.0.0.0/0
 MANAGEMENT_SUBNET_CIDR=10.0.1.0/24
 MANAGEMENT_SUBNET_NAME="Management subnet"
+MONITORING_SUBNET_CIDR=10.0.2.0/24
+MONITORING_SUBNET_NAME="Monitoring subnet"
 
 ## Create the main VPC
 VPC_ID=`ec2-create-vpc $MAIN_VPC_CIDR | cut -f 2`
@@ -48,5 +50,12 @@ ec2-associate-route-table $PUBLIC_ROUTE_TABLE_ID --subnet $PUBLIC_SUBNET_ID
 MANAGEMENT_SUBNET_ID=`ec2-create-subnet --vpc $VPC_ID --cidr $MANAGEMENT_SUBNET_CIDR | cut -f 2`
 echo "Management subnet id is: $MANAGEMENT_SUBNET_ID"
 ec2-create-tags $MANAGEMENT_SUBNET_ID --tag Name="$MANAGEMENT_SUBNET_NAME"
+
+# Monitoring Subnet
+MONITORING_SUBNET_ID=`ec2-create-subnet --vpc $VPC_ID --cidr $MONITORING_SUBNET_CIDR | cut -f 2`
+echo "Monitoring subnet id is: $MONITORING_SUBNET_ID"
+ec2-create-tags $MONITORING_SUBNET_ID --tag Name="$MONITORING_SUBNET_NAME"
+
+
 
 ## Configure network ACL's
