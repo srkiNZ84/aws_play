@@ -13,7 +13,7 @@ INSTANCE_APPLICATION="Graphite web server"
 SEC_GROUP_ID=`ec2-add-group $SEC_GROUP_NAME -d "$SEC_GROUP_DESCRIPTION" --vpc $VPC_ID | cut -f 2`
 ec2-authorize $SEC_GROUP_ID -p 22 -P tcp
 ec2-authorize $SEC_GROUP_ID -p 2003 -P udp
-ec2-autohrize $SEC_GROUP_ID -p 80 -P tcp
+ec2-authorize $SEC_GROUP_ID -p 80 -P tcp
 ec2-authorize $SEC_GROUP_ID -p 443 -P tcp
 
 # Create keypair
