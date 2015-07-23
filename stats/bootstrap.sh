@@ -14,6 +14,8 @@ GENERATED_KEY=`pwgen -cn 30 1`
 sed -i -e "s/UNSAFE_DEFAULT/$GENERATED_KEY/" /etc/graphite/local_settings.py
 sed -i -e "s/#SECRET_KEY/SECRET_KEY/" /etc/graphite/local_settings.py
 sed -i -e "s/#TIME_ZONE = 'America\/Los_Angeles'/TIME_ZONE = 'Pacific\/Auckland'/" /etc/graphite/local_settings.py
+sed -i -e "s/false/true/" /etc/default/graphite-carbon
+sed -i -e "s/ENABLE_UDP_LISTENER = False/ENABLE_UDP_LISTENER = True/" /etc/carbon/carbon.conf
 a2dissite 000-default
 a2ensite 100-graphite
 graphite-manage syncdb --noinput
@@ -29,3 +31,4 @@ exit()
 EOF
 chown -R _graphite /var/lib/graphite
 service apache2 restart
+service carbon-cache start
