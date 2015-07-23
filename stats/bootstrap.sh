@@ -27,4 +27,5 @@ usr.set_password('$ADMINPASS')
 usr.save()
 exit()
 EOF
-service apache2 reload
+chown -R _graphite /var/lib/graphite
+service apache2 restart
